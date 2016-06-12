@@ -130,6 +130,40 @@ public class Main {
         }
     }
 
+    static class Box<T> {
+        T v;
+
+        private Box() {}
+
+        public Box(T v) {
+            this.v = v;
+        }
+
+        public void openBox() {
+            System.out.println(v);
+        }
+
+    }
+
+    static class NumberBox<T extends Number> extends Box<T> {
+        public NumberBox(T v) {
+            this.v = v;
+        }
+    }
+
+    public static void test666() {
+
+        Box<Integer> integerBox = new Box<>(11);
+        Box<String> stringBox = new Box<>("11");
+
+        NumberBox<Number> nb1 = new NumberBox<>(11);
+        NumberBox<Double> nb2 = new NumberBox<>(12.345);
+
+//        nb1 = (NumberBox<Number>)nb2; error
+
+    }
+
+
 
     public static void main(String[] args) {
         List<Task<Integer>> tasks = new LinkedList<>();
@@ -137,5 +171,9 @@ public class Main {
         tasks.add(new NumberTask<>(2));
         tasks.add(new NumberTask<>(3));
         test(tasks);
+//
+//        A<Number> a1 = new A<>();
+//        A<Integer> a2 = new A<>();
+//        a2 = a1;
     }
 }
